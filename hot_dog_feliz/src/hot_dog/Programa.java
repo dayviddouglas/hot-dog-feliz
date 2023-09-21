@@ -5,10 +5,35 @@ import java.util.Scanner;
 public class Programa {
 
 	public static void main(String[] args) throws Exception {
-		Scanner entrada = new Scanner(System.in);
-		ClienteHotDog cli = new ClienteHotDog();
+		
+		boolean confirmacao = false;
 		 int opcaoSelecionada = 0;
-		 String nomeCliente,dataNasciCliente,cpfCliente,endeCliente;  
+		String nomeCliente,dataNasciCliente,cpfCliente,endeCliente,loginAcesso,senhaAcesso; 
+		
+		Scanner entrada = new Scanner(System.in);
+		
+		FuncionarioHotDog func = new FuncionarioHotDog();
+		
+		ClienteHotDog cli = new ClienteHotDog();
+		 
+		 while (confirmacao == false) {
+		 System.out.println("\nSeja Bem vindo ao Hot Dog Feliz!!\n");
+		 
+		 System.out.println("Pagina de Login\n");
+		 
+		 System.out.println("Digite seu login");
+		 loginAcesso = entrada.nextLine();
+		 
+		 System.out.println("Digite sua senha");
+		 senhaAcesso = entrada.nextLine();
+            	if (!func.verificarLogin(loginAcesso, senhaAcesso)) {
+            		System.out.println("Login ou senha incorretos...");
+            	}else {
+            		System.out.println("Logado com sucesso");
+        	      confirmacao = true;
+            	}
+                     	
+        }
 		 
 		 do {
           System.out.println("\nSeja Bem vindo ao Hot Dog Feliz!!\n");
@@ -21,6 +46,7 @@ public class Programa {
 			   System.out.println("3 - Alterar Cliente.");
 			   System.out.println("4 - Remover Cliente.");
 			   System.out.println("5 - Exibir todos os clientes.");
+			   System.out.println("6 - Alterar senha");
 			   System.out.println("9 - Sair do sistema. ");
 			   
 			   opcaoSelecionada = entrada.nextInt();
@@ -77,6 +103,17 @@ public class Programa {
 				cli.listaClientes();
 				
 			break;
+			case 6:
+				
+				System.out.println("Digite o seu cpf:");
+				String cpfUsu = entrada.nextLine();
+				
+				System.out.println("Digite a sua nova senha:");
+				String senhaUsu = entrada.nextLine();
+				
+				func.alterarSenha(cpfUsu, senhaUsu);
+				
+			break;
 			
 			case 9:
 				System.out.println("Você saiu do Sistema. ");
@@ -89,6 +126,8 @@ public class Programa {
 			   
 			   
 		 }while (opcaoSelecionada != 9);
+		 
+		 entrada.close();
 		 
 			 
 			

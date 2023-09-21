@@ -4,54 +4,27 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class ClienteHotDog {
-   private String cpf;
-  private String nome;
-  private String data_nascimento;
-  private String endereco;
+public class ClienteHotDog extends UsuarioHotDog{
   
-
-   
-public String getCpf() {
-	return cpf;
-}
-
-public void setCpf(String cpf) {
-	this.cpf = cpf;
-}
-
-public String getNome() {
-	return nome;
-}
-
-public void setNome(String nome) {
-	this.nome = nome;
-}
-
-public String getData_nascimento() {
-	return data_nascimento;
-}
-
-public void setData_nascimento(String data_nascimento) {
-	this.data_nascimento = data_nascimento;
-}
-
-
-
-  public String getEndereco() {
-	return endereco;
-}
-
-public void setEndereco(String endereco) {
-	this.endereco = endereco;
-}
-
-
-public String convertSql (String palavra) {
+  private String cpfUsuario;
+  
 	
-	return "'"+ palavra + "'";
-	
+	public String getCpfUsuario() {
+	return cpfUsuario;
 }
+
+public void setCpfUsuario(String cpfUsuario) {
+	this.cpfUsuario = cpfUsuario;
+}
+
+	public ClienteHotDog() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ClienteHotDog(UsuarioHotDog usuario) {
+		this.cpfUsuario = usuario.getCpf();
+		
+	}
 
 public void criarCliente (String nomeCliente, String dataNascCliente, String cpfCliente, String EndeCliente) throws Exception {
 	  
@@ -102,7 +75,7 @@ public void criarCliente (String nomeCliente, String dataNascCliente, String cpf
 	  ResultSet rs = stment.executeQuery("Select * from cliente where cpf =" + cpfSql);
 	      
 	       if (!rs.isBeforeFirst()) {
-	    	   System.out.println("Cliente inexistente...");
+	    	   throw new ClienteInexistenteException();
 	       }
 	      while (rs.next()) {
 	    	  System.out.println(" Dados do cliente: \n cpf do Cliente: "+ rs.getString("cpf")+
@@ -122,13 +95,14 @@ public void criarCliente (String nomeCliente, String dataNascCliente, String cpf
 	   Statement statment = conexaoDelet.createStatement();
 	   String queryDelete = "DELETE FROM cliente where cpf ="+cpfSql+";";
 	    int resultado = statment.executeUpdate(queryDelete);
-	    conexaoDelet.close();
-	    statment.close();
+	    
 	    if (resultado != 1) {
 	    	System.out.println("Houve algum erro na deleção...");
 	    }
 	    
 	    System.out.println("Registro foi deletado com sucesso!");
+	    conexaoDelet.close();
+	    statment.close();
 	  
   }
   
