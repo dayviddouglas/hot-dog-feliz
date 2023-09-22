@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import configuracoes.Conexao;
+
 public class FuncionarioHotDog extends UsuarioHotDog {
 
     private String login;
@@ -126,6 +128,7 @@ public class FuncionarioHotDog extends UsuarioHotDog {
 		  
 		  connLoginCreate.close();
 		  statmet.close();
+		  entrada.close();
 		
 		}catch (Exception e) {
 			e.getMessage();
@@ -148,11 +151,13 @@ public class FuncionarioHotDog extends UsuarioHotDog {
 			     while (resul.next()) {
 			    	 loginBanco = resul.getString("login");
 					 senhaBanco = resul.getString("senha");
+					 if (loginFunc.equals(loginBanco) && senhaFunc.equals(senhaBanco)) {
+						 confirm = true;
+						 break;
+					  }
 			     }
 
-			  if (loginFunc.equals(loginBanco) && senhaFunc.equals(senhaBanco)) {
-				 confirm = true;
-			  }
+			  
 			  
 			  connec.close();
 			  stm.close();
@@ -180,6 +185,7 @@ public class FuncionarioHotDog extends UsuarioHotDog {
 			Statement state = conex.createStatement();
 			int resultado = state.executeUpdate("update funcionario set senha =" + senhaFormatada+ "where cpf ="+ cpfFormatado);
 			
+			retorno = (resultado == 1)?"Senha alterada com sucesso!": "Ocorreu algum problema";
 			conex.close();
 			state.close();
 		} catch (Exception e) {
@@ -188,13 +194,10 @@ public class FuncionarioHotDog extends UsuarioHotDog {
 		}
 		
 		
-		
-		
-		retorno = "Senha alterada com sucesso!";
-		
 		return retorno;
 		
 	}
+	
 	
 	
 	
