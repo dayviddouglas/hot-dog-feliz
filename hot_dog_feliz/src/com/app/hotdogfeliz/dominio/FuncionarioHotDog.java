@@ -1,11 +1,11 @@
-package hot_dog;
+package com.app.hotdogfeliz.dominio;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import configuracoes.Conexao;
+import com.app.hotdogfeliz.conexao.Conexao;
 
 public class FuncionarioHotDog extends UsuarioHotDog {
 

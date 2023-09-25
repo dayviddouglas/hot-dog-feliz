@@ -1,4 +1,4 @@
-package hot_dog;
+package com.app.hotdogfeliz.exception;
 
 public class ClienteInexistenteException extends RuntimeException {
 	

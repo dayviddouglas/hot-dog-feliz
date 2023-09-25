@@ -1,4 +1,4 @@
-package hot_dog;
+package com.app.hotdogfeliz.dominio;
 
 public abstract class UsuarioHotDog {
 	  private String cpf;
