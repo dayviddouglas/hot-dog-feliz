@@ -1,4 +1,4 @@
-package telas;
+package com.app.hotdogfeliz.telas;
 
 import java.awt.Color;
 import java.awt.Font;
