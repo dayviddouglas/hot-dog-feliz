@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 import com.app.hotdogfeliz.conexao.Conexao;
 import com.app.hotdogfeliz.exception.ClienteInexistenteException;
 
@@ -81,6 +83,9 @@ public void criarCliente (String nomeCliente, String dataNascCliente, String cpf
 	    	   throw new ClienteInexistenteException();
 	       }
 	      while (rs.next()) {
+	    	  JOptionPane.showMessageDialog(null," Dados do cliente: \n cpf do Cliente: "+ rs.getString("cpf")+
+	    			   ", nome do cliente: "+ rs.getString("nome")+ ", data de nascimento: "
+					   + rs.getString("data_nascimento")+ ", endereço: " + rs.getString("endereco"), "Confirmação", JOptionPane.INFORMATION_MESSAGE);
 	    	  System.out.println(" Dados do cliente: \n cpf do Cliente: "+ rs.getString("cpf")+
 	    			   ", nome do cliente: "+ rs.getString("nome")+ ", data de nascimento: "
 	    					   + rs.getString("data_nascimento")+ ", endereço: " + rs.getString("endereco") );
@@ -122,6 +127,11 @@ public void criarCliente (String nomeCliente, String dataNascCliente, String cpf
 		  
 		  System.out.println(" Esses são todos os clientes:\n");
 		  while (rs.next()) {
+			  JOptionPane.showMessageDialog(null,"cpf do Cliente: "+ rs.getString("cpf")+
+			   ", nome do cliente: "+ rs.getString("nome")+ ", data de nascimento: "
+					   + rs.getString("data_nascimento")+ ", endereço: " + rs.getString("endereco"), "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+			  
+			  
 			   System.out.println("cpf do Cliente: "+ rs.getString("cpf")+
 			   ", nome do cliente: "+ rs.getString("nome")+ ", data de nascimento: "
 					   + rs.getString("data_nascimento")+ ", endereço: " + rs.getString("endereco") );	
